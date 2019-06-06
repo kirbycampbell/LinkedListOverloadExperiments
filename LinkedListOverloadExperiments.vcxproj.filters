@@ -21,6 +21,9 @@
     <ClCompile Include="imp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="example.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes.hpp">

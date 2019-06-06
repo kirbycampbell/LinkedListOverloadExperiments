@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="example.cpp" />
     <ClCompile Include="imp.cpp" />
     <ClCompile Include="mainTest.cpp" />
   </ItemGroup>

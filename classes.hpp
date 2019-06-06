@@ -16,7 +16,7 @@ public:
 	Artist(char[], double);
 	const char * getName();
 	const double getRating();
-	//Artist & operator=(Artist &otherArtist);
+	Artist & operator=(Artist &otherArtist);
 };
 
 struct node {
@@ -25,12 +25,12 @@ struct node {
 };
 
 class ArtistTypes {
-	node * head;
-	node * next;
+	node *head, *tail;
 	int count;
 
 public:
 	ArtistTypes();
+	void addNode(Artist artist);
 	void addAnArtist();
 	void listArtists();
 	~ArtistTypes();
