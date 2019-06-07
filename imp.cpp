@@ -3,6 +3,7 @@
 ArtistTypes::ArtistTypes() {
 	count = 0;
 	head = NULL;
+	tail = NULL;
 	//head->link = next;
 
 }
@@ -12,7 +13,7 @@ ArtistTypes::~ArtistTypes() {
 }
 
 Artist::Artist() {
- //name = NULL;
+ name = NULL;
 	rating = 0;
 }
 
@@ -24,51 +25,66 @@ Artist::Artist(char nameArg[], double ratingArg) {
 	rating = ratingArg;
 }
 
-//Artist & Artist::operator=(Artist & otherArtist) {
-//	//Artist newArtist = new Artist;
-//	//newArtist = otherArtist;
-//	return otherArtist;
-//}
 
+Artist & Artist::operator=(const Artist& otherArtist) {
+	name = otherArtist.name;
+	rating = otherArtist.rating;
+	return *this;
+}
 
-
-const char * Artist::getName() {
+ char * Artist::getName() {
 	return name;
 }
-const double Artist::getRating() {
+ double Artist::getRating() {
 	return rating;
 }
 
 // This Showcases how to add a node
 void ArtistTypes::addNode(Artist artist) {
 	// Set up temp node variable & assign it's artist to function arg.
-	node * temp = new node;
+	Node *temp = new Node;
 	temp->artist = artist;
 	temp->link = NULL;
 	// Assign tempSorter to head
-	node * tempSorter = new node;
-	tempSorter->artist = head->artist;
-	tempSorter->link = NULL;
+	//node * tempSorter = new node;
+	//tempSorter = head;
 
-	bool posFound = false;
-
+	//bool posFound = false;
 
 	// If no nodes exist connect head to first node
 	if (head == NULL) {
 		head = temp;
 		tail = temp;
-		temp->link = NULL;
+		temp = NULL;
 	}
 	// Sort nodes and add appropriately
 	else {
-		while (!posFound) {
-			if (strcomp(tempSorter->artist.getName(), temp->artist.getName()) < 0) {
-				tempSorter = tempSorter->link;
-
-			}
-		}
 		tail->link = temp;
 		tail = temp;
+		//// Need to keep tail assigned to the end
+		//while (!posFound) {
+		//	if (strcmp(tempSorter->artist.getName(), temp->link->artist.getName()) < 0) { // If head is less than new node
+		//		tempSorter = tempSorter->link; // move head to next node - which moves futher down the list
+		//	} else if (
+		//		(strcmp(tempSorter->artist.getName(), temp->artist.getName()) < 0) // If sorter is less than temp
+		//		&& // ****************************************************************** AND
+		//		(strcmp(tempSorter->link->artist.getName(), temp->artist.getName()) > 0)) // If Sorter's next is greater
+		//	{ // Then the spot has been found
+		//		temp->link = tempSorter->link; // link new node to the next list item
+		//		tempSorter->link = temp; // link the previous list item to the new node
+		//		posFound = true; // exit the while loop
+		//	}
+		//	else if (
+		//		(strcmp(tempSorter->artist.getName(), temp->artist.getName()) < 0) // If sorter is less than temp
+		//		&& // ****************************************************************** AND
+		//		(tempSorter->link == NULL)) // If at end of list
+		//	{ // Then the spot has been found
+		//		tempSorter->link == temp;// link the previous list item to the new node
+		//		posFound = true; // exit the while loop
+		//	}
+
+		//}
+
 	}
 }
 
@@ -98,7 +114,7 @@ void ArtistTypes::addAnArtist() {
 
 void ArtistTypes::listArtists() {
 	// Declare location variable for traversing
-	node * listLocation = new node;
+	Node * listLocation = new Node;
 	listLocation = head;
 	cout << "List the Artists" << endl;
 

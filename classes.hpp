@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cstring>
 
+
 using namespace std;
 
 
@@ -14,18 +15,19 @@ class Artist {
 public:
 	Artist();
 	Artist(char[], double);
-	const char * getName();
-	const double getRating();
-	Artist & operator=(Artist &otherArtist);
+	Artist & operator=(const Artist &otherArtist);
+	 char * getName();
+	 double getRating();
+
 };
 
-struct node {
+struct Node {
 	Artist artist;
-	node * link;
+	Node * link;
 };
 
 class ArtistTypes {
-	node *head, *tail;
+	Node *head, *tail;
 	int count;
 
 public:
