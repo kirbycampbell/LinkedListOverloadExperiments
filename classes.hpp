@@ -3,11 +3,10 @@
 #include <fstream>
 #include <cstring>
 
-
 using namespace std;
 
+const int arraySize = 128;
 
-const int arraySize = 128; // Declares Global Constant
 class Artist {
 	char * name;
 	double rating;
@@ -18,7 +17,6 @@ public:
 	Artist & operator=(const Artist &otherArtist);
 	const char * getName();
 	const double getRating();
-
 };
 
 struct Node {
@@ -27,7 +25,7 @@ struct Node {
 };
 
 class ArtistTypes {
-	Node *head, *tail;
+	Node *head;
 	int count;
 
 public:
