@@ -16,8 +16,8 @@ public:
 	Artist();
 	Artist(char[], double);
 	Artist & operator=(const Artist &otherArtist);
-	 char * getName();
-	 double getRating();
+	const char * getName();
+	const double getRating();
 
 };
 
@@ -35,5 +35,7 @@ public:
 	void addNode(Artist artist);
 	void addAnArtist();
 	void listArtists();
+	void searchArtists();
+	void removeArtist();
 	~ArtistTypes();
 };

@@ -4,8 +4,6 @@ ArtistTypes::ArtistTypes() {
 	count = 0;
 	head = NULL;
 	tail = NULL;
-	//head->link = next;
-
 }
 
 ArtistTypes::~ArtistTypes() {
@@ -25,68 +23,92 @@ Artist::Artist(char nameArg[], double ratingArg) {
 	rating = ratingArg;
 }
 
-
+// Operator Overload - WORKING
 Artist & Artist::operator=(const Artist& otherArtist) {
 	name = otherArtist.name;
 	rating = otherArtist.rating;
 	return *this;
 }
 
- char * Artist::getName() {
+ const char * Artist::getName() {
 	return name;
 }
- double Artist::getRating() {
+ const double Artist::getRating() {
 	return rating;
 }
 
 // This Showcases how to add a node
 void ArtistTypes::addNode(Artist artist) {
 	// Set up temp node variable & assign it's artist to function arg.
-	Node *temp = new Node;
-	temp->artist = artist;
-	temp->link = NULL;
-	// Assign tempSorter to head
-	//node * tempSorter = new node;
-	//tempSorter = head;
-
-	//bool posFound = false;
+	Node *newArtist = new Node;
+	newArtist->artist = artist;
+	newArtist->link = NULL;
+	Node * curr = new Node;
+	Node * prev = new Node;
 
 	// If no nodes exist connect head to first node
 	if (head == NULL) {
-		head = temp;
-		tail = temp;
-		temp = NULL;
+		head = newArtist;
+		//tail = newArtist;
 	}
 	// Sort nodes and add appropriately
-	else {
-		tail->link = temp;
-		tail = temp;
-		//// Need to keep tail assigned to the end
-		//while (!posFound) {
-		//	if (strcmp(tempSorter->artist.getName(), temp->link->artist.getName()) < 0) { // If head is less than new node
-		//		tempSorter = tempSorter->link; // move head to next node - which moves futher down the list
-		//	} else if (
-		//		(strcmp(tempSorter->artist.getName(), temp->artist.getName()) < 0) // If sorter is less than temp
-		//		&& // ****************************************************************** AND
-		//		(strcmp(tempSorter->link->artist.getName(), temp->artist.getName()) > 0)) // If Sorter's next is greater
-		//	{ // Then the spot has been found
-		//		temp->link = tempSorter->link; // link new node to the next list item
-		//		tempSorter->link = temp; // link the previous list item to the new node
-		//		posFound = true; // exit the while loop
-		//	}
-		//	else if (
-		//		(strcmp(tempSorter->artist.getName(), temp->artist.getName()) < 0) // If sorter is less than temp
-		//		&& // ****************************************************************** AND
-		//		(tempSorter->link == NULL)) // If at end of list
-		//	{ // Then the spot has been found
-		//		tempSorter->link == temp;// link the previous list item to the new node
-		//		posFound = true; // exit the while loop
-		//	}
-
-		//}
-
+	else if (strcmp(newArtist->artist.getName(), head->artist.getName()) < 0) {
+		newArtist->link = head;
+		head = newArtist;
 	}
+	else {
+		prev = head;
+		curr = head->link;
+		while (curr != NULL) {
+			if (strcmp(newArtist->artist.getName(), curr->artist.getName()) < 0) { // While new Item is greater than Curr
+				prev->link = newArtist;
+				newArtist->link = curr;
+				break;
+			}
+			else {
+				prev = curr; // assign prev's link to newItem
+				curr = curr->link;
+			}
+		}
+		if (curr == NULL) {
+			prev->link = newArtist;
+		}
+	}
+	
 }
+
+void ArtistTypes::searchArtists() {
+
+}
+
+void ArtistTypes::removeArtist() {
+
+}
+
+void ArtistTypes::listArtists() {
+	// Declare location variable for traversing
+	Node * listLocation = new Node;
+	bool endOfList = false;
+	listLocation = head;
+	cout << "List the Artists" << endl;
+
+	while (!endOfList) { // While traversing var isnt NULL
+		cout << "Artist: ";
+		// Output name and rating
+		cout << listLocation->artist.getName() << " ::: " << "Rating: ";
+		cout << listLocation->artist.getRating() << endl;
+		// This makes listLocation traverse
+		if (listLocation->link == NULL) {
+			endOfList = true;
+		}
+		else if (listLocation->link != NULL) {
+			listLocation = listLocation->link;
+
+		}
+	}
+
+}
+
 
 void ArtistTypes::addAnArtist() {
 	cout << "Add an artist" << endl;
@@ -99,38 +121,10 @@ void ArtistTypes::addAnArtist() {
 	cin.getline(tName, arraySize, '\n');
 	cin.clear(); //Input stream clear
 	cout << "Enter a rating: " << endl;
-	cin >> tRating;	
+	cin >> tRating;
 	cin.clear(); //Input stream clear
 
 	// Create new Artist, and add to linked list
 	Artist tempArtist(tName, tRating);
 	addNode(tempArtist);
-}
-
-
-
-
-
-
-void ArtistTypes::listArtists() {
-	// Declare location variable for traversing
-	Node * listLocation = new Node;
-	listLocation = head;
-	cout << "List the Artists" << endl;
-
-	while (listLocation != NULL) { // While traversing var isnt NULL
-		cout << "Artist: ";
-		// Output name and rating
-		cout << listLocation->artist.getName() << " ::: " << "Rating: ";
-		cout << listLocation->artist.getRating() << endl;
-		// This makes listLocation traverse
-		if (listLocation->link != NULL) {
-			listLocation = listLocation->link;
-
-		}
-		else {
-			break;
-		}
-	}
-
 }

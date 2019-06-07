@@ -13,7 +13,7 @@ int main()
 	while (cont) {
 		cin.clear(); //Input stream clear
 	
-		cout << "Want to add an artist or List the artists? (Enter 1 for add, 2 for list or 9 for quit)" << endl;
+		cout << "Want to add an artist or List the artists? (Enter 1 for add, 2 for list, 3 for search, 4 for remove, or 9 for quit)" << endl;
 		cin.clear(); //Input stream clear
 
 		cin >> sent;
@@ -27,6 +27,14 @@ int main()
 		}
 		else if (sent == 2) {
 			artistDB.listArtists();
+
+		}
+		else if (sent == 3) {
+			artistDB.searchArtists();
+
+		}
+		else if (sent == 4) {
+			artistDB.removeArtist();
 
 		}
 		else if (sent == 9) {
