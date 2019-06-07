@@ -30,6 +30,7 @@ int main()
 
 		}
 		else if (sent == 3) {
+
 			artistDB.searchArtists();
 
 		}

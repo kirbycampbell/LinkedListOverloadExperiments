@@ -78,7 +78,35 @@ void ArtistTypes::addNode(Artist artist) {
 }
 
 void ArtistTypes::searchArtists() {
+	Node * listLocation = new Node;
+	bool endOfList = false;
+	bool found = false;
+	listLocation = head;
+	char artist[arraySize];
 
+	cout << "Enter the artist name you would like to search for: " << endl;
+	cin.getline(artist, '\n');
+	cout << "Searching for " << artist << ": " << endl;
+	while (!endOfList) { // While traversing var isnt NULL
+	
+		if (strcmp(listLocation->artist.getName(), artist) == 0) {
+			cout << "Found!" << endl;
+			cout << listLocation->artist.getName() << " ::: " << "Rating: ";
+			cout << listLocation->artist.getRating() << endl;
+			endOfList = true;
+			found = true;
+		}
+		if (listLocation->link == NULL) {
+			endOfList = true;
+		}
+		else if (listLocation->link != NULL) {
+			listLocation = listLocation->link;
+		}
+	}
+
+	if (!found) {
+		cout << "Nothing found by that name, try again..." << endl;
+	}
 }
 
 void ArtistTypes::removeArtist() {
