@@ -38,7 +38,8 @@ Artist::Artist(char nameArg[], double ratingArg) {
 
 // Operator Overload - WORKING
 Artist & Artist::operator=(const Artist& otherArtist) {
-	name = otherArtist.name;
+	name = new char[strlen(otherArtist.name) + 1];
+	strcpy(name, otherArtist.name);
 	rating = otherArtist.rating;
 	return *this;
 }
@@ -64,7 +65,6 @@ void ArtistTypes::addNode(Artist artist) {
 	// If no nodes exist connect head to first node
 	if (head == NULL) {
 		head = newArtist;
-		//tail = newArtist;
 	}
 	// Sort nodes and add appropriately
 	else if (strcmp(newArtist->artist.getName(), head->artist.getName()) < 0) {
